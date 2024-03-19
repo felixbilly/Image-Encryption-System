@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encryption and Decryption Result</title>
+    <title> Decryption Result</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,30 +14,49 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 100px;
             text-align: center;
+            background-color: #f1f1f1;
         }
         img {
             max-width: 100%;
             margin-bottom: 20px;
         }
+        .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Encryption and Decryption Result</h1>
-        
-        <div class="result">
-            <h2>Encrypted Image</h2>
-            <img src="{% static 'image/encrypted_image.png'%}" alt="Encrypted Image">
-        </div>
-        
-        <div class="result">
-            <h2>Decrypted Image</h2>
-            <img src="{{ decrypted_image }}" alt="Decrypted Image">
-
+    
+    <div class="container-fluid">
+        <div class="row content">
+          <div class="col-sm-3 sidenav">
+            <h1>Encryption and Decryption Result</h1>
             
-        </div>
+      
+              
+                
+                
+                <div class="result">
+                    <h2>Encrypted Image</h2>
+                    <img src="{% static 'image/encrypted_image.png'%}" alt="Encrypted Image">
+                </div>
+                
+                <div class="result">
+                    <h2>Decrypted Image</h2>
+                    <li><a href="/upload_image/"><span class="glyphicon glyphicon-log-in"></span> Decrypted Image</a></li>
+                    
+                   
+        
+                    
+                </div>
+      </div>
+    
     </div>
+</div>
 </body>
 </html>

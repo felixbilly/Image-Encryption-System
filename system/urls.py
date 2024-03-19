@@ -1,4 +1,4 @@
-"""
+
 from django.urls import path
 from . import views 
 from django.urls import re_path as url
@@ -18,7 +18,9 @@ urlpatterns = [
     path('signin/', views.signin, name="signin"),
 
     path('signout/', views.signout, name="signout"),
-    
+    path('encrypted_image/', views.encrypt_decrypt_view, name='encrypt_image'),
+    path('result/', views.result, name='result'),
+    path('upload_image/', views.decrypt_image_view, name='decrypt_image'),
 
 
     url(r'^$', views.button),
@@ -29,7 +31,7 @@ urlpatterns = [
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-"""
+
 
 
 
@@ -43,20 +45,20 @@ from . import views
 #]
 
 
-
+"""
 from django.urls import path
 from .views import encrypt_decrypt_view
 from . import views
 
 urlpatterns = [
     #path('', encrypt_decrypt_view, name='encrypt_decrypt'),
-    path('', views.encrypt_decrypt_view, name='encrypt_image'),
+    path('encrypted_image/', views.encrypt_decrypt_view, name='encrypt_image'),
     path('result/', views.result, name='result'),
     path('upload_image/', views.decrypt_image_view, name='decrypt_image'),
 
 
 ]
-
+"""
 
 
 
