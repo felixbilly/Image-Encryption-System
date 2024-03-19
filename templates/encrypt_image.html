@@ -1,0 +1,89 @@
+<!-- encrypt_image.html 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt Image</title>
+</head>
+<body>
+    <h1>Encrypt Image</h1>
+    <form action="{% url 'encrypt_image' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image" accept="image/*" required>
+        <input type="text" name="key" placeholder="Enter encryption key" required>
+        <button type="submit">Encrypt Image</button>
+    </form>
+</body>
+</html>
+-->
+
+
+<!-- encrypt_image.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt Image</title>
+</head>
+<body>
+    <h1>Encrypt Image</h1>
+    <form method="post" action="/encrypt_image/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image" accept="image/*" required><br>
+        <button type="submit">Encrypt Image</button>
+    </form>
+</body>
+
+
+
+
+
+
+
+<!--
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption and Decryption Result</title>
+</head>
+<body>
+    <h1>Encryption and Decryption Result</h1>
+    <h2>Encrypted Image:</h2>
+    <input type="file" name="encrypted_image">
+    <img src="{{ encrypted_image }}" alt="Encrypted Image">
+    <h2>Decrypted Image:</h2>
+    <img src="{{ decrypted_image }}" alt="Decrypted Image">
+</body>
+///
+
+///
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Encryption and Decryption</title>
+</head>
+<body>
+    <h2>Upload Image for Encryption</h2>
+    <form action="{% url 'encrypt_image' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image">
+        <button type="submit">Encrypt Image</button>
+    </form>
+
+    <h2>Upload Encrypted Image for Decryption</h2>
+    <form action="{% url 'decrypt_image' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="encrypted_image">
+        <button type="submit">Decrypt Image</button>
+    </form>
+</body>
+</html>
+-->

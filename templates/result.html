@@ -1,0 +1,43 @@
+{%load static%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption and Decryption Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Encryption and Decryption Result</h1>
+        
+        <div class="result">
+            <h2>Encrypted Image</h2>
+            <img src="{% static 'image/encrypted_image.png'%}" alt="Encrypted Image">
+        </div>
+        
+        <div class="result">
+            <h2>Decrypted Image</h2>
+            <img src="{{ decrypted_image }}" alt="Decrypted Image">
+
+            
+        </div>
+    </div>
+</body>
+</html>

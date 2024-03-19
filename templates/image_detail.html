@@ -1,0 +1,18 @@
+<!-- image_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Detail</title>
+</head>
+<body>
+    <h1>Image Detail</h1>
+    <h2>Encrypted Image:</h2>
+    <img src="{{ encrypted_image.image.url }}" alt="Encrypted Image">
+    {% if decrypted_image %}
+    <h2>Decrypted Image:</h2>
+    <img src="{{ decrypted_image.decrypted_image.url }}" alt="Decrypted Image">
+    {% endif %}
+</body>
+</html>
