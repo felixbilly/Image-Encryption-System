@@ -1,11 +1,9 @@
 # Image-Encryption-System
-Encrypt and Decrypt Images into Dotted Grayscale
+Encrypting images  Images 
 # Recomendations : install
 django
 Pillow 
 Six
-Pycryptodome(for AES encryption standards modules)
+Pycryptodome(for AES encryption standards models)
  create a  Virtual Environment
-
- ---IMGCRYPT.IO system copy right @ 2024---
  
