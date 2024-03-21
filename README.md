@@ -4,6 +4,8 @@ Encrypt and Decrypt Images into Dotted Grayscale
 django
 Pillow 
 Six
-Pycryptodome(for AES encryption standards models)
+Pycryptodome(for AES encryption standards modules)
  create a  Virtual Environment
+
+ ---IMGCRYPT.IO system copy right @ 2024---
  
