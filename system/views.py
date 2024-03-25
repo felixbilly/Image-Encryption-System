@@ -22,6 +22,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required 
 #from .test import output, time
 from django.http import HttpResponse
+from .models import Result
 #from image1 import image_name ,image_fullpath
 # Create your views here.
 
@@ -29,9 +30,15 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request,'index\index.html')
+
 @ login_required(login_url='signin')
 def page(request):
-    return render(request,'home.html')
+    current_user=request.user
+    user_id=current_user.id
+    print(user_id)
+    context={'user_id': user_id}
+    
+    return render(request,'home.html', context)
 
 
 def signup(request):
@@ -112,9 +119,53 @@ def external(request):
 
 
 
+
+# def insert(request):
+#     if  request.method== 'POST':
+#         key=request.POST.get('param')
+#         image =request.FILES['image']
+#         encrypted_image = encrypt_image(image)
+
+#         process=Result(key= key, image=image, encrypted_image=encrypted_image)
+
+#         process.save()
+        
+
+#         return redirect('result')
+
+#     return render(request, 'home.html')
+
+def insert(request):
+    if request.method == 'POST':
+        key = request.POST.get('param')
+        image = request.FILES['image']
+
+        # Encrypt the image
+        encrypted_image = encrypt_image(image)
+
+        # Save the encrypted image file
+        encrypted_image_file_path = os.path.join(settings.MEDIA_ROOT, 'encrypted_images', image.name)
+        encrypted_image.save(encrypted_image_file_path)
+
+        # Save the Result object with the encrypted image field
+        process = Result(key=key, image=image, encrypted_image=encrypted_image_file_path)
+        process.save()
+
+        return redirect('result')
+
+    return render(request, 'home.html')
+
+
+def Retrieve(request):
+    images = Result.objects.get()
+
+    return render(request, 'result.html',{"images":images })
+
+
 # Image Encryption Processing
 
 def encrypt_image(image):
+    image = Image.open(image)
     gray_img = image.convert('L')  # Convert image to grayscale
     width, height = gray_img.size
     dotted_img = Image.new('L', (width, height))
@@ -139,33 +190,39 @@ def decrypt_image(image):
 
     return original_img
 
-def encrypt_decrypt_view(request, ):
-    if request.method == 'POST':
-        if 'image' in request.FILES:
-            uploaded_image = request.FILES['image']
-            img = Image.open(uploaded_image)
-            encrypted_image = encrypt_image(img)
-            decrypted_image = decrypt_image(encrypted_image)
-             # Directory to save images
-            images_directory = os.path.join(settings.BASE_DIR, 'static', 'images')
-            os.makedirs(images_directory, exist_ok=True)  # Create directory if it doesn't exist
+def encrypt_decrypt_view(request, pk ):
 
-            # Save the encrypted and decrypted images in the static directory
-            encrypted_image_path = os.path.join('images', 'encrypted_image.png')
-            decrypted_image_path = os.path.join('images', 'decrypted_image.png')
+    # image = Result.objects.get(pk)
 
-            encrypted_image.save(os.path.join(settings.BASE_DIR, 'static', encrypted_image_path))
-            decrypted_image.save(os.path.join(settings.BASE_DIR, 'static', decrypted_image_path))
+    
+    # # uploaded_image = request.FILES['image']
+    # img = Image.open(image)
+    # encrypted_image = encrypt_image(img)
+    # # decrypted_image = decrypt_image(encrypted_image)
 
-            # Save the encrypted and decrypted images
-            #encrypted_image_path = 'encrypted_image.png'
-            #decrypted_image_path = 'decrypted_image.png'
+    # save to database
 
-            #encrypted_image.save(encrypted_image_path)
-            ##decrypted_image.save(decrypted_image_path)
 
-            return render(request, 'result.html', {'encrypted_image': encrypted_image_path, 'decrypted_image': decrypted_image_path})
-    return render(request, 'encrypt_decrypt.html')
+        # Directory to save images
+    # images_directory = os.path.join(settings.BASE_DIR, 'static', 'images')
+    # os.makedirs(images_directory, exist_ok=True)  # Create directory if it doesn't exist
+
+    # # Save the encrypted and decrypted images in the static directory
+    # encrypted_image_path = os.path.join('images', 'encrypted_image.png')
+    # decrypted_image_path = os.path.join('images', 'decrypted_image.png')
+
+    # encrypted_image.save(os.path.join(settings.BASE_DIR, 'static', encrypted_image_path))
+    # decrypted_image.save(os.path.join(settings.BASE_DIR, 'static', decrypted_image_path))
+
+    # Save the encrypted and decrypted images
+    #encrypted_image_path = 'encrypted_image.png'
+    #decrypted_image_path = 'decrypted_image.png'
+
+    #encrypted_image.save(encrypted_image_path)
+    ##decrypted_image.save(decrypted_image_path)
+
+    return render(request, 'result.html', {'encrypted_image': encrypted_image_path, 'decrypted_image': decrypted_image_path})
+# return render (request, 'home.html')#(request, 'encrypt_decrypt.html')
 
 def decrypt_image_view(request):
     # Path to the encrypted image
@@ -186,4 +243,9 @@ def decrypt_image_view(request):
     return HttpResponse(decrypted_image_byte_array, content_type='image/png')
 
 def result(request):
-    return render(request, 'result.html' )
+    images = Result.objects.all()
+
+    return render(request, 'result.html',{"images":images } )
+
+def result2(request):
+    return render(request, 'upload2.html' )

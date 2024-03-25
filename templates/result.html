@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Decryption Result</title>
+    <title> ImgCrypt.io-Result</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,25 +36,34 @@
         <div class="row content">
           <div class="col-sm-3 sidenav">
             <h1>Encryption and Decryption Result</h1>
-            
+       
       
+                         
+                <div class="result">
+              
+              <div class="row">
+                {% for result in images %}
+                
+                <div class="col-sm-4" style="border: 1px solid black;margin-left: 20px;">
+                  <img src="{{ result.image.url }}" height=400 width=400  class="img-responsive" style="width:100%" alt="Image">
+                  <p>RAW IMAGE</p>
+                </div>
+                {%if result.encrypted_image%}
+                <div class="col-sm-4" style="border: 1px solid black; margin-left: 20px;"> 
+                  <img src="{{ result.encrypted_image.url }}" height=400 width=400  class="img-responsive" style="width:100%" alt="Image">
+                  
+                  
+                  <p>PROCESSED IMAGE</p> 
+                    
+                </div>
+                {% endif %} 
+                <br>
+                {% endfor %}
+                
               
                 
+
                 
-                <div class="result">
-                    <h2>Encrypted Image</h2>
-                    <img src="{% static 'image/encrypted_image.png'%}" alt="Encrypted Image">
-                    <li><a href="/upload_image/"><span class="glyphicon glyphicon-log-in"></span> encrypted Image</a></li>
-                </div>
-                
-                <div class="result">
-                    <h2>Decrypted Image</h2>
-                    <li><a href="/upload_image/"><span class="glyphicon glyphicon-log-in"></span> Decrypted Image</a></li>
-                    
-                   
-        
-                    
-                </div>
       </div>
     
     </div>

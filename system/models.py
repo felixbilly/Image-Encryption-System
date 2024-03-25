@@ -15,7 +15,21 @@ class DecryptedImage(models.Model):
 
     # models.py
 from django.db import models
+from django.contrib.auth.models import User
 
-class EncryptedImage(models.Model):
-    image = models.ImageField(upload_to='encrypted_images/')
-    key = models.BinaryField()  # Store the encryption key as binary data
+
+class profile(models.Model):
+    User= models.OneToOneField(User, null=True, on_delete=models.CASCADE )
+    def _str_(self):
+     return str(self.user)
+
+# class EncryptedImage(models.Model):
+#     image = models.ImageField(upload_to='encrypted_images/')
+#     key = models.CharField(max_length=20, )  # Store the encryption key as binary data
+
+class Result(models.Model):
+   key=models.CharField(max_length=20 , blank=False)
+   image= models.ImageField(upload_to='images',default='profile.png')
+   encrypted_image= models.ImageField(upload_to='images',null = True, default='encryted.png')
+
+  
