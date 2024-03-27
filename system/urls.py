@@ -24,6 +24,8 @@ urlpatterns = [
     path('result2/', views.result2, name='result2'),
     path('upload_image/', views.decrypt_image_view, name='decrypt_image'),
 
+    path('decrypt/', views.fetch_encrypted_image, name='decrypt'),
+
 
     path('external', views.external,name='external'),
 

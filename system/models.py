@@ -28,7 +28,7 @@ class profile(models.Model):
 #     key = models.CharField(max_length=20, )  # Store the encryption key as binary data
 
 class Result(models.Model):
-   key=models.CharField(max_length=20 , blank=False)
+   key=models.CharField(max_length=20 , blank=False, unique=True)
    image= models.ImageField(upload_to='images',default='profile.png')
    encrypted_image= models.ImageField(upload_to='images',null = True, default='encryted.png')
 

@@ -140,6 +140,13 @@ def insert(request):
         key = request.POST.get('param')
         image = request.FILES['image']
 
+        if Result.objects.filter(key=key).exists():
+            # Handle the case where the key already exists
+            # You can display an error message or redirect the user back to the form
+            # For simplicity, we'll just redirect back to the form in this example
+            return redirect('insert')  # Replace 'form_url' with the URL name of your form
+        
+
         # Encrypt the image
         encrypted_image = encrypt_image(image)
 
@@ -249,3 +256,20 @@ def result(request):
 
 def result2(request):
     return render(request, 'upload2.html' )
+
+# from .models import EncryptedImage
+
+def fetch_encrypted_image(request):
+    encrypted_image = None
+
+    if request.method == 'POST':
+        key = request.POST.get('key')
+        # Assume EncryptedImage is your model representing encrypted images
+        try:
+            encrypted_image_obj = Result.objects.get(key=key)
+            encrypted_image = encrypted_image_obj.image.url
+        except Result.DoesNotExist:
+            # Handle the case where the key doesn't match any encrypted image
+            pass
+
+    return render(request, 'decrypt_image.html', {'encrypted_image': encrypted_image})

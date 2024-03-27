@@ -1,34 +1,46 @@
-<!-- decrypt_image.html 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decrypt Image</title>
+    <title>Fetch Encrypted Image</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS */
+        .sidenav {
+            background-color: #f1f1f1;
+            
+        }
+    </style>
 </head>
 <body>
-    <h1>Decrypt Image</h1>
-    <form action="{% url 'decrypt_image' image_id %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="key" placeholder="Enter decryption key" required>
-        <button type="submit">Decrypt Image</button>
-    </form>
-</body>
-</html>
--->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 sidenav">
+                <h1 class="mt-5 mb-4">Fetch Encrypted Image</h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="key">Enter Key:</label>
+                        <input type="text" class="form-control" id="key" name="key">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Fetch Image</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                {% if encrypted_image %}
+                    <div class="mt-4 text-center">
+                        <h2>Encrypted Image</h2>
+                        <img src="{{ encrypted_image }}" class="img-fluid" alt=" ">
+                        <a href="{{ encrypted_image }}" download="encrypted_image.png" class="btn btn-success mt-3">Download Encrypted Image</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
-
-
-<!-- decrypt_image.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decrypted Image</title>
-</head>
-<body>
-    <h1>Decrypted Image</h1>
-    <img src="data:image/png;base64,{{ image_data }}" alt="Decrypted Image">
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

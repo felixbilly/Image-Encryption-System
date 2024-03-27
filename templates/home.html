@@ -97,8 +97,9 @@
   <div class="row content">
     <div class="col-sm-3 sidenav">
       <h4 style="color: #001a4d;">Image Processor.</h4>
-<div class="well">
-        <p><a href="#">{{request.user.username}}</a></p>
+<div class="well" style="text-align: center;">
+        <h4 ><u>user</u></h4>
+        <p><h4><a href="#">{{request.user.username}}</a></h4></p>
         
         <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
       </div>
@@ -129,27 +130,18 @@
 
 <div class="container text-center">    
   <h3 style="color: #001a4d;"><u>RESULTS DISPLAY.</u></h3><br>
-  <div class="row">
-    {% for result in images %}
-    
-    <div class="col-sm-4" style="border: 1px solid black;margin-left: 20px;">
-      <img src="{{ result.image.url }}" height=400 width=400  class="img-responsive" style="width:100%" alt="Image">
-      <p>RAW IMAGE</p>
-    </div>
-    {%if result.encrypted_image%}
-    <div class="col-sm-4" style="border: 1px solid black; margin-left: 20px;"> 
-      <img src="{{ result.encrypted_image.url }}" height=400 width=400  class="img-responsive" style="width:100%" alt="Image">
-      
-      
-      <p>PROCESSED IMAGE</p> 
-        
-    </div>
-    {% endif %} 
-    <br>
-    {% endfor %}
-    
-  
-    
+
+
+
+  <div class="col-md-6">
+    {% if encrypted_image %}
+        <div class="mt-4 text-center">
+            <h2>Encrypted Image</h2>
+            <img src="{{ encrypted_image }}" class="img-fluid" alt="Encrypted Image">
+            <a href="{{ encrypted_image }}" download="encrypted_image.png" class="btn btn-success mt-3">Download Encrypted Image</a>
+        </div>
+    {% endif %}
+</div>
 
     
 </div>
